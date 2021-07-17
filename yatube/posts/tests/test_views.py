@@ -50,8 +50,7 @@ class UrlTest(TestCase):
 
     def test_group_page(self):
         response = self.authorized_client.get(
-            reverse('group_posts', kwargs={'slug': 'test-slug'})
-            )
+            reverse('group_posts', kwargs={'slug': 'test-slug'}))
         self.assertEqual(response.context['group'].title, 'test title')
         self.assertEqual(response.context['group'].slug, 'test-slug')
 
