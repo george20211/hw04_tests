@@ -1,5 +1,3 @@
-# static_pages/tests/test_urls.py
-from django.shortcuts import redirect
 from django.test import TestCase, Client
 from posts.models import Group, Post
 from django.contrib.auth import get_user_model

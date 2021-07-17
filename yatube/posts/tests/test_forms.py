@@ -1,14 +1,7 @@
-import shutil
-import tempfile
-
-from django.conf import settings
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 from django.urls import reverse
 from ..forms import PostForm
-from ..models import Post, Group, User
-import sqlite3 as lite
-import sys
+from ..models import Post, User
 
 
 class TaskCreateFormTests(TestCase):
@@ -32,17 +25,17 @@ class TaskCreateFormTests(TestCase):
         form_data = {
             'text': 'Тестовый текст',
         }
-        response = self.authorized_client.post(
+        self.authorized_client.post(
             reverse('new_post'),
             data=form_data,
             follow=True
         )
 
-        self.assertEqual(Post.objects.count(), counter+1)
+        self.assertEqual(Post.objects.count(), counter + 1)
         self.assertTrue(
             Post.objects.filter(
                 text='Тестовый текст',
-                ).exists()
+            ).exists()
         )
 
     def test_edit_post(self):

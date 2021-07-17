@@ -2,11 +2,7 @@ from ..forms import PostForm
 from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
 from django.urls import reverse
-
 from posts.models import Group, Post
-
-
-
 
 
 User = get_user_model()
@@ -112,8 +108,9 @@ class PaginatorViewsTest(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.group = Group.objects.create(
-                title='testGroup',
-                slug='test-slug2',)
+            title='testGroup',
+            slug='test-slug2',
+        )
         cls.author = User.objects.create_user(username='TEST_USR')
         for _ in range(13):
             Post.objects.create(
