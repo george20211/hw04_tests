@@ -45,9 +45,12 @@ class UrlTest(TestCase):
         response = self.guest_client.get(f'/{ self.author }/{ self.post.id }/')
         self.assertEqual(response.status_code, 200, 'err5')
 
-        response = self.guest_client.get(f'/{ self.author }/{ self.post.id }/edit/')
-        self.assertRedirects(response, f'/auth/login/?next=/{ self.author }/{ self.post.id }/edit/')
-        
+        response = self.guest_client.get(
+            f'/{ self.author }/{ self.post.id }/edit/')
+        self.assertRedirects(
+            response,
+            f'/auth/login/?next=/{ self.author }/{ self.post.id }/edit/')
+
     def test_auth_usr(self):
 
         response = self.authorized_client.get("/")
@@ -62,7 +65,8 @@ class UrlTest(TestCase):
         self.assertEqual(response.status_code, 200, 'err05')
         self.assertTemplateUsed(response, 'new.html', 'err06')
 
-        response = self.authorized_client.get(f'/{ self.author }/{ self.post.id }/edit/')
+        response = self.authorized_client.get(
+            f'/{ self.author }/{ self.post.id }/edit/')
         self.assertEqual(response.status_code, 200, 'err07')
 
     def test_auth_non_author(self):

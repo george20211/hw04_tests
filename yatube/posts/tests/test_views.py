@@ -26,10 +26,10 @@ class UrlTest(TestCase):
             slug='test-slug'
         )
         cls.contexted = {
-            'text' : 'TestText',
-            'author' : 'AndreyG',
-            'title' : 'test title',
-            'slug' : 'test-slug',
+            'text': 'TestText',
+            'author': 'AndreyG',
+            'title': 'test title',
+            'slug': 'test-slug',
         }
 
     def setUp(self):
@@ -57,13 +57,16 @@ class UrlTest(TestCase):
     def test_group_page(self):
         response = self.authorized_client.get(
             reverse('group_posts', kwargs={'slug': 'test-slug'}))
-        self.assertEqual(response.context['group'].title, self.contexted['title'])
-        self.assertEqual(response.context['group'].slug, self.contexted['slug'])
+        self.assertEqual(
+            response.context['group'].title, self.contexted['title'])
+        self.assertEqual(
+            response.context['group'].slug, self.contexted['slug'])
 
     def test_page_index(self):
         response = self.authorized_client.get(
             reverse('index',))
-        self.assertEqual(response.context['page'][0].text, self.contexted['text'])
+        self.assertEqual(
+            response.context['page'][0].text, self.contexted['text'])
 
     def test_new_post_page(self):
         response = self.authorized_client.get(
@@ -82,13 +85,16 @@ class UrlTest(TestCase):
     def test_profile_context(self):
         response = self.authorized_client.get(
             reverse('profile', kwargs={'username': f'{self.author}'}))
-        self.assertEqual(response.context['page'][0].text, self.contexted['text'])
-        self.assertEqual(response.context['profile'].username, self.contexted['author'])
+        self.assertEqual(
+            response.context['page'][0].text, self.contexted['text'])
+        self.assertEqual(
+            response.context['profile'].username, self.contexted['author'])
 
     def test_post_in_right_group(self):
         response = self.guest_client.get(
             reverse('group_posts', kwargs={'slug': 'test-slug2'}))
-        self.assertEqual(response.context['page'][0].text, self.contexted['text'])
+        self.assertEqual(
+            response.context['page'][0].text, self.contexted['text'])
 
         response = self.guest_client.get(
             reverse('group_posts', kwargs={'slug': 'test-slug'}))
@@ -96,7 +102,8 @@ class UrlTest(TestCase):
             response.context['page'][0].text
 
         response = self.authorized_client.get(reverse('index'))
-        self.assertEqual(response.context['page'][0].text, self.contexted['text'])
+        self.assertEqual(
+            response.context['page'][0].text, self.contexted['text'])
 
 
 class PaginatorViewsTest(TestCase):
@@ -115,7 +122,6 @@ class PaginatorViewsTest(TestCase):
     def setUp(self):
         self.client = Client()
 
-    
     def test_first_page_contains_ten_records(self):
         response = self.client.get(reverse('index'))
         self.assertEqual(len(response.context.get('page').object_list), 10)

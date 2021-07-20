@@ -28,8 +28,8 @@ class TaskCreateFormTests(TestCase):
         }
 
         self.un_auth_client.post(reverse('new_post'),
-            data=form_data,
-            follow=True)
+                                 data=form_data,
+                                 follow=True,)
         self.assertEqual(Post.objects.count(), counter)
 
         self.authorized_client.post(
@@ -39,8 +39,7 @@ class TaskCreateFormTests(TestCase):
         )
 
         self.assertEqual(Post.objects.count(), counter + 1)
-        self.assertTrue(self.author.username == 'AndreyG'
-            )
+        self.assertTrue(self.author.username == 'AndreyG')
 
     def test_edit_post(self):
         counter = Post.objects.count()
@@ -53,5 +52,4 @@ class TaskCreateFormTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(id_post.text, 'ИзменилТекст')
         self.assertEqual(Post.objects.count(), counter)
-        self.assertTrue(self.author.username == 'AndreyG'
-            )
+        self.assertTrue(self.author.username == 'AndreyG')

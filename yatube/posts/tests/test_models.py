@@ -17,8 +17,8 @@ class PostModelTest(TestCase):
         group = PostModelTest.Group
         post = PostModelTest.Post
         context = {
-            "title":"test",
-            "post":"тестовыйпостна1"
+            "title": "test",
+            "post": "тестовыйпостна1"
         }
         self.assertEqual(context['title'], group.title)
         self.assertEqual(context['post'], post.text[:15])
