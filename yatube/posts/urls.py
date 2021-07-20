@@ -13,5 +13,5 @@ urlpatterns = [
     path('<str:username>/<int:post_id>/edit/', views.post_edit,
          name='post_edit'),
     path('la/stats/', views.stats, name='stats'),
-    path('signup/', include("django.contrib.auth.urls"), name='users'), 
+    path('signup/', include("django.contrib.auth.urls"), name='users'),
 ]
