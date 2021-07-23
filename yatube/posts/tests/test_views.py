@@ -30,6 +30,7 @@ class UrlTest(TestCase):
             'author': 'AndreyG',
             'title': 'test title',
             'slug': 'test-slug',
+            'title2': 'testGroup',
         }
 
     def setUp(self):
@@ -65,8 +66,16 @@ class UrlTest(TestCase):
     def test_page_index(self):
         response = self.authorized_client.get(
             reverse('index',))
+
         self.assertEqual(
             response.context['page'][0].text, self.contexted['text'])
+        self.assertEqual(
+            response.context['page'][0].author.username,
+            self.contexted['author']
+            )
+        self.assertEqual(
+            response.context['page'][0].group.title, self.contexted['title2']
+            )
 
     def test_new_post_page(self):
         response = self.authorized_client.get(

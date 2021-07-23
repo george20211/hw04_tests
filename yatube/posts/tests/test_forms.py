@@ -39,7 +39,8 @@ class TaskCreateFormTests(TestCase):
         )
 
         self.assertEqual(Post.objects.count(), counter + 1)
-        self.assertTrue(self.author.username == 'AndreyG')
+        self.assertEqual(self.author.username,
+                         self.post.author.username)
 
     def test_edit_post(self):
         counter = Post.objects.count()
@@ -50,6 +51,7 @@ class TaskCreateFormTests(TestCase):
             data=form_data)
         id_post = Post.objects.get(id=self.post.id)
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(id_post.text, 'ИзменилТекст')
+        self.assertEqual(id_post.text, form_data['text'])
         self.assertEqual(Post.objects.count(), counter)
-        self.assertTrue(self.author.username == 'AndreyG')
+        self.assertEqual(self.author.username,
+                         self.post.author.username)
