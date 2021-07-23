@@ -5,9 +5,9 @@ __pycache__/
 
 # C extensions
 *.so
-/yatube/sent_emails/
-/yatube/htmlcov/
-/yatube/.vscode
+*/sent_emails/
+*/htmlcov/
+*/.vscode
 # Distribution / packaging
 .Python
 build/
